@@ -1,0 +1,18 @@
+#search.pull-right
+  = form_tag pins_path, method: :get do
+    %fieldset
+      = text_field_tag :search, params[:search]
+      =submit_tag 'Search'
+%br
+%br
+%br
+#pins.transitions-enabled
+  - @pins.each do |pin|
+    .box.panel.panel-default
+      -if pin.image.present?
+        = link_to ( image_tag pin.image.url ), pin
+      .panel-body
+        %h2= link_to pin.title, pin
+        %p.user
+          Submitted by
+          = pin.user.email
